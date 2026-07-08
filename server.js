@@ -55,9 +55,13 @@ const DEFAULT_FALLBACK_LEADS = [
 let fallbackLeads = [];
 
 const ensureDataDirectory = () => {
-  const dir = path.dirname(DATA_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  try {
+    const dir = path.dirname(DATA_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  } catch (error) {
+    console.error("Failed to ensure data directory:", error);
   }
 };
 
@@ -65,9 +69,14 @@ const loadFallbackLeads = () => {
   ensureDataDirectory();
 
   if (!fs.existsSync(DATA_FILE)) {
-    const seededLeads = DEFAULT_FALLBACK_LEADS.map((lead) => ({ ...lead }));
-    fs.writeFileSync(DATA_FILE, JSON.stringify(seededLeads, null, 2));
-    return seededLeads;
+    try {
+      const seededLeads = DEFAULT_FALLBACK_LEADS.map((lead) => ({ ...lead }));
+      fs.writeFileSync(DATA_FILE, JSON.stringify(seededLeads, null, 2));
+      return seededLeads;
+    } catch (error) {
+      console.error("Failed to seed fallback leads file:", error);
+      return DEFAULT_FALLBACK_LEADS.map((lead) => ({ ...lead }));
+    }
   }
 
   try {
@@ -81,8 +90,12 @@ const loadFallbackLeads = () => {
 };
 
 const saveFallbackLeads = () => {
-  ensureDataDirectory();
-  fs.writeFileSync(DATA_FILE, JSON.stringify(fallbackLeads, null, 2));
+  try {
+    ensureDataDirectory();
+    fs.writeFileSync(DATA_FILE, JSON.stringify(fallbackLeads, null, 2));
+  } catch (error) {
+    console.error("Failed to save fallback leads data:", error);
+  }
 };
 
 fallbackLeads = loadFallbackLeads();
@@ -347,8 +360,8 @@ app.put("/api/leads/:id", (req, res) => {
   );
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
