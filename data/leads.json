@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "customer": "Ava Johnson",
+    "company": "Northstar Labs",
+    "industry": "Technology",
+    "status": "Qualified",
+    "stage": "Demo",
+    "value": "$12,500",
+    "owner": "Mina",
+    "source": "Website",
+    "phone": "+1-555-0101",
+    "email": "ava@northstarlabs.com"
+  },
+  {
+    "id": 2,
+    "customer": "Daniel Kim",
+    "company": "Bright Commerce",
+    "industry": "Retail",
+    "status": "Follow-up",
+    "stage": "Proposal",
+    "value": "$8,200",
+    "owner": "Leo",
+    "source": "Referral",
+    "phone": "+1-555-0102",
+    "email": "daniel@brightcommerce.com"
+  },
+  {
+    "id": 3,
+    "customer": "Sarah Patel",
+    "company": "Greenfield Health",
+    "industry": "Healthcare",
+    "status": "New",
+    "stage": "Discovery",
+    "value": "$5,000",
+    "owner": "Nia",
+    "source": "LinkedIn",
+    "phone": "+1-555-0103",
+    "email": "sarah@greenfieldhealth.com"
+  }
+]
